@@ -1,0 +1,7 @@
+Package: param_poller
+Priority: optional
+Maintainer: tanagraspace
+Architecture: sepp
+Section: Applications
+Version: 1.0.0
+Description: An app that provides live period readings of a configurable set of parameters
