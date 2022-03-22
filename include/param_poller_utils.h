@@ -40,6 +40,7 @@ typedef struct
 /* params struct request */
 typedef struct
 {
+    uint32_t timestamp;
     bool presence_flag;
     char filename[CSV_OUTPUT_FILENAME_SIZE];    /* e.g. value toGround/params1_1647837518.csv (31 characters) */
     char* names_csv;
@@ -106,7 +107,7 @@ PARAM_POLLER_EXPORT int
 
 //  Write the param values as a row in a csv file
 PARAM_POLLER_EXPORT int
-    param_poller_utils_write_params_csv_row (FILE *fpt, union mal_attribute_t *attr_list, unsigned char *tag_list, size_t attr_count);
+    param_poller_utils_write_params_csv_row (FILE *fpt, uint32_t timestamp, union mal_attribute_t *attr_list, unsigned char *tag_list, size_t attr_count);
 
 
 #ifdef __cplusplus

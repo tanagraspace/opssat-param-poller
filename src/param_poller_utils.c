@@ -297,6 +297,9 @@ param_poller_utils_fetch_and_set_params_attributes (mc_parameter_service_t *para
         }
         else
         {
+            /* set the timestamp that will be used to indicate when the data was fetched */
+            parameters->timestamp = (unsigned)time(NULL);
+
             rc = mc_parameter_service_get_value_list(parameter_service, parameters->definitions.inst_id_list, parameters->definitions.list_size,
                 &parameters->attributes.attr_list, &parameters->attributes.tag_list, &parameters->attributes.list_size);
 
@@ -320,11 +323,11 @@ param_poller_utils_fetch_and_set_params_attributes (mc_parameter_service_t *para
 int
 param_poller_utils_fetch_and_set_params_attributes_all (mc_parameter_service_t *parameter_service, configuration *config)
 {
-    param_poller_utils_fetch_and_set_params_attributes (parameter_service, &config->params1);
-    param_poller_utils_fetch_and_set_params_attributes (parameter_service, &config->params2);
-    param_poller_utils_fetch_and_set_params_attributes (parameter_service, &config->params3);
-    param_poller_utils_fetch_and_set_params_attributes (parameter_service, &config->params4);
-    param_poller_utils_fetch_and_set_params_attributes (parameter_service, &config->params5);
+    param_poller_utils_fetch_and_set_params_attributes(parameter_service, &config->params1);
+    param_poller_utils_fetch_and_set_params_attributes(parameter_service, &config->params2);
+    param_poller_utils_fetch_and_set_params_attributes(parameter_service, &config->params3);
+    param_poller_utils_fetch_and_set_params_attributes(parameter_service, &config->params4);
+    param_poller_utils_fetch_and_set_params_attributes(parameter_service, &config->params5);
 
     return 0;
 }
@@ -334,10 +337,13 @@ param_poller_utils_fetch_and_set_params_attributes_all (mc_parameter_service_t *
 //  Write the param values as a row in a csv file
 
 int
-param_poller_utils_write_params_csv_row (FILE *fpt, union mal_attribute_t *attr_list, unsigned char *tag_list, size_t attr_count)
+param_poller_utils_write_params_csv_row (FILE *fpt, uint32_t timestamp, union mal_attribute_t *attr_list, unsigned char *tag_list, size_t attr_count)
 {
     union mal_attribute_t attr; 
     unsigned char tag;
+
+    /* write the timestamp for the row of param values that's about to be written */
+    fprintf(fpt, "%"PRIu32",", timestamp);
 
     for(size_t i = 0; i < attr_count; i++)
     {
@@ -415,7 +421,7 @@ param_poller_utils_write_params_csv_row (FILE *fpt, union mal_attribute_t *attr_
         }
         else
         {
-             fprintf(fpt, "\n");
+            fprintf(fpt, "\n");
         }
         
 
