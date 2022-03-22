@@ -314,9 +314,6 @@ main (int argc, char *argv [])
     /* get pointer to the Parameter service */
     mc_parameter_service_t *parameter_service = nmf_api_get_mc_parameter_service(nmf_api);
 
-    /* fetch and set all param attributes */
-    param_poller_utils_fetch_and_set_params_attributes_all(parameter_service, &config);
-
 
     /* init csv file pointers */
 
@@ -324,65 +321,75 @@ main (int argc, char *argv [])
     if(config.params1.presence_flag)
     {
         fpt_params1 = fopen(config.params1.filename, "w+");      /* open file */
-        fprintf(fpt_params1, "%s\n", config.params1.names_csv);  /* write header row */
+        fprintf(fpt_params1, "timestamp,%s\n", config.params1.names_csv);  /* write header row */
     }
 
     FILE *fpt_params2;
     if(config.params2.presence_flag)
     {
         fpt_params2 = fopen(config.params2.filename, "w+");
-        fprintf(fpt_params2, "%s\n", config.params2.names_csv);
+        fprintf(fpt_params2, "timestamp,%s\n", config.params2.names_csv);
     }
 
     FILE *fpt_params3;
     if(config.params3.presence_flag)
     {
         fpt_params3 = fopen(config.params3.filename, "w+");
-        fprintf(fpt_params3, "%s\n", config.params3.names_csv);
+        fprintf(fpt_params3, "timestamp,%s\n", config.params3.names_csv);
     }
 
     FILE *fpt_params4;
     if(config.params4.presence_flag)
     {
         fpt_params4 = fopen(config.params4.filename, "w+");
-        fprintf(fpt_params4, "%s\n", config.params4.names_csv);
+        fprintf(fpt_params4, "timestamp,%s\n", config.params4.names_csv);
     }
 
     FILE *fpt_params5;
     if(config.params5.presence_flag)
     {
         fpt_params5 = fopen(config.params5.filename, "w+");
-        fprintf(fpt_params5, "%s\n", config.params5.names_csv);
+        fprintf(fpt_params5, "timestamp,%s\n", config.params5.names_csv);
     }
 
-
-     /* write the param values as a row in a csv file */
+    /* fetch and set all param attributes */
+    /* write the param values as a row in a csv file */
 
     for(size_t i = 0; i < config.iterations; i++)
     {   
+        /* fetch and set all param attributes */
+        param_poller_utils_fetch_and_set_params_attributes_all(parameter_service, &config);
+
+        /* write the param values as a row in a csv file */
+
         if(config.params1.presence_flag)
         {
-            param_poller_utils_write_params_csv_row(fpt_params1, config.params1.attributes.attr_list, config.params1.attributes.tag_list, config.params1.attributes.list_size);
+            param_poller_utils_write_params_csv_row(fpt_params1,
+                config.params1.timestamp, config.params1.attributes.attr_list, config.params1.attributes.tag_list, config.params1.attributes.list_size);
         }
 
         if(config.params2.presence_flag)
         {
-            param_poller_utils_write_params_csv_row(fpt_params2, config.params2.attributes.attr_list, config.params2.attributes.tag_list, config.params2.attributes.list_size);
+            param_poller_utils_write_params_csv_row(fpt_params2,
+                config.params2.timestamp, config.params2.attributes.attr_list, config.params2.attributes.tag_list, config.params2.attributes.list_size);
         }
 
         if(config.params3.presence_flag)
         {
-            param_poller_utils_write_params_csv_row(fpt_params3, config.params3.attributes.attr_list, config.params3.attributes.tag_list, config.params3.attributes.list_size);
+            param_poller_utils_write_params_csv_row(fpt_params3,
+                config.params3.timestamp, config.params3.attributes.attr_list, config.params3.attributes.tag_list, config.params3.attributes.list_size);
         }
 
         if(config.params4.presence_flag)
         {
-            param_poller_utils_write_params_csv_row(fpt_params4, config.params4.attributes.attr_list, config.params4.attributes.tag_list, config.params4.attributes.list_size);
+            param_poller_utils_write_params_csv_row(fpt_params4,
+                config.params4.timestamp, config.params4.attributes.attr_list, config.params4.attributes.tag_list, config.params4.attributes.list_size);
         }
 
         if(config.params5.presence_flag)
         {
-            param_poller_utils_write_params_csv_row(fpt_params5, config.params5.attributes.attr_list, config.params5.attributes.tag_list, config.params5.attributes.list_size);
+            param_poller_utils_write_params_csv_row(fpt_params5,
+                config.params5.timestamp, config.params5.attributes.attr_list, config.params5.attributes.tag_list, config.params5.attributes.list_size);
         }
         
         /* sleep before fetching new values */

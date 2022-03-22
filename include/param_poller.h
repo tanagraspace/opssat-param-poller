@@ -11,6 +11,8 @@
 //  Include the project library file
 #include "param_poller_library.h"
 
+#include <inttypes.h>
+
 //  Add your own public definitions here, if you need them
 
 #endif
