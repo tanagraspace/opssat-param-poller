@@ -74,6 +74,11 @@
     <class name = "someother" private = "1">Private class description</class>
     -->
 
+    <!-- A utils class -->
+    <class name = "param_poller_utils" selftest = "0">
+        A utils class
+    </class>
+
     <!-- The ini parser class  -->
     <class name = "param_poller_ini_parser" selftest = "0">
         Simple .INI file parser

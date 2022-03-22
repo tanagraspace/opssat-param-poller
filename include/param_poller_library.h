@@ -74,6 +74,8 @@
 //  These classes are stable or legacy and built in all releases
 //  Draft classes are by default not built in stable releases
 #ifdef PARAM_POLLER_BUILD_DRAFT_API
+typedef struct _param_poller_utils_t param_poller_utils_t;
+#define PARAM_POLLER_UTILS_T_DEFINED
 typedef struct _param_poller_ini_parser_t param_poller_ini_parser_t;
 #define PARAM_POLLER_INI_PARSER_T_DEFINED
 #endif // PARAM_POLLER_BUILD_DRAFT_API
@@ -81,6 +83,7 @@ typedef struct _param_poller_ini_parser_t param_poller_ini_parser_t;
 
 //  Public classes, each with its own header file
 #ifdef PARAM_POLLER_BUILD_DRAFT_API
+#include "param_poller_utils.h"
 #include "param_poller_ini_parser.h"
 #endif // PARAM_POLLER_BUILD_DRAFT_API
 
