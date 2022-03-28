@@ -1,3 +1,9 @@
+# The experiment id.
+EXPERIMENT_ID=212
+
+# The executable binary filename
+BIN_FILENAME="param_poller_app"
+
 # The name of the project.
 # Extract the project name from the control file (set as the package name).
 PROJECT_NAME=$(sed -n -e '/^Package/p' sepp_package/CONTROL/control | cut -d ' ' -f2)
@@ -12,4 +18,4 @@ LOCAL_APP_BIN_DIR="../${BUILD_BIN_PATH}"
 
 # Deployment paths on the SEPP.
 SEPP_LIB_DIR="/usr/lib"
-SEPP_BIN_DIR="/home/root/georges/apps/malc/${PROJECT_NAME}" # Change this if needed.
+SEPP_BIN_DIR="/home/root/exp${EXPERIMENT_ID}" # Change this if needed.
