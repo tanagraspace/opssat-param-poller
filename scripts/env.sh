@@ -18,4 +18,4 @@ LOCAL_APP_BIN_DIR="../${BUILD_BIN_PATH}"
 
 # Deployment paths on the SEPP.
 SEPP_LIB_DIR="/usr/lib"
-SEPP_BIN_DIR="/home/root/exp${EXPERIMENT_ID}" # Change this if needed.
+SEPP_BIN_DIR="/home/exp${EXPERIMENT_ID}" # Change this if needed.
