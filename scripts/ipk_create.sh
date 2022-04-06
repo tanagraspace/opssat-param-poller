@@ -34,6 +34,11 @@ cp ../${LOCAL_APP_BIN_DIR}/${BIN_FILENAME} ../sepp_package${SEPP_BIN_DIR}
 cp ../start_exp*.sh ../sepp_package${SEPP_BIN_DIR}
 cp ../stop_exp*.sh ../sepp_package${SEPP_BIN_DIR}
 
+# Fetch the provider.properties file after updating its apid value to 1024 + Experimend Id 
+APID=$((1024+${EXPERIMENT_ID}))
+sed -i "s/org\.ccsds\.moims\.mo\.malspp\.apid=.*/org.ccsds.moims.mo.malspp.apid=${APID}/g" ../../provider.properties
+cp ../../provider.properties ../sepp_package${SEPP_BIN_DIR}
+
 # Fetch .ini config file
 cp ../../*.ini ../sepp_package${SEPP_BIN_DIR}
 
